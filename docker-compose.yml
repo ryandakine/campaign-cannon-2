@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  campaign-cannon:
+    build: .
+    container_name: campaign-cannon
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data              # SQLite DB persists
+      - ./campaigns:/app/campaigns    # Campaign media persists
+      - ./backups:/app/backups        # Backup archives
+    env_file: .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    environment:
+      - CANNON_DB_PATH=/app/data/campaign_cannon.db
+    deploy:
+      resources:
+        limits:
+          memory: 512M
