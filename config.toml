@@ -1,0 +1,44 @@
+# Campaign Cannon v3.1 — Configuration
+# Non-secret settings. Secrets go in .env
+
+[general]
+app_name = "Campaign Cannon"
+version = "3.1.0"
+log_level = "INFO"              # Override with CANNON_LOG_LEVEL env var
+log_format = "json"             # "json" or "console"
+
+[database]
+path = "./data/campaign_cannon.db"
+wal_mode = true
+busy_timeout_ms = 5000
+
+[scheduler]
+misfire_grace_time = 300        # seconds — jobs missed by this much still fire
+max_concurrent_publishes = 3    # parallel publish workers
+stuck_post_timeout = 300        # seconds before PUBLISHING → QUEUED recovery
+
+[retry]
+max_retries = 3
+backoff_base = 30               # seconds — exponential: 30, 120, 480
+backoff_multiplier = 4
+
+[rate_limits]
+# Per-platform defaults (overridable per credential)
+twitter_posts_per_window = 300
+twitter_window_seconds = 10800  # 3 hours
+reddit_posts_per_minute = 1
+linkedin_posts_per_day = 100
+
+[media]
+max_image_size_mb = 20          # Global max; platform-specific limits in adapters
+max_video_size_mb = 512
+thumbnail_enabled = false       # V2 feature
+
+[api]
+host = "0.0.0.0"
+port = 8000
+cors_origins = ["http://localhost:3000", "http://localhost:8000"]
+
+[dashboard]
+enabled = true
+refresh_interval = 5            # seconds
