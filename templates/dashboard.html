@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Cannon 2 — Dashboard</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <h1>Campaign Cannon 2</h1>
+            <div class="header-meta">
+                <span id="refresh-countdown" class="countdown">30s</span>
+                <button id="btn-refresh" class="btn btn-sm">Refresh Now</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <!-- Row 1: Summary + Rate Limits -->
+        <div class="row">
+            <section class="card card-summary">
+                <h2>Campaign Status</h2>
+                <div id="summary-grid" class="summary-grid">
+                    <div class="stat">
+                        <span class="stat-value" id="stat-total">—</span>
+                        <span class="stat-label">Total</span>
+                    </div>
+                    <div class="stat draft">
+                        <span class="stat-value" id="stat-draft">—</span>
+                        <span class="stat-label">Draft</span>
+                    </div>
+                    <div class="stat active">
+                        <span class="stat-value" id="stat-active">—</span>
+                        <span class="stat-label">Active</span>
+                    </div>
+                    <div class="stat paused">
+                        <span class="stat-value" id="stat-paused">—</span>
+                        <span class="stat-label">Paused</span>
+                    </div>
+                    <div class="stat completed">
+                        <span class="stat-value" id="stat-completed">—</span>
+                        <span class="stat-label">Completed</span>
+                    </div>
+                    <div class="stat cancelled">
+                        <span class="stat-value" id="stat-cancelled">—</span>
+                        <span class="stat-label">Cancelled</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card card-rate-limits">
+                <h2>Rate Limit Headroom</h2>
+                <div id="rate-limits" class="rate-limits"></div>
+            </section>
+        </div>
+
+        <!-- Row 2: Next Due + Retry Queue -->
+        <div class="row">
+            <section class="card">
+                <h2>Next Due Posts</h2>
+                <div id="next-due" class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Platform</th>
+                                <th>Copy</th>
+                                <th>Scheduled</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="next-due-body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Retry Queue</h2>
+                <div id="retry-queue" class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Platform</th>
+                                <th>Copy</th>
+                                <th>Retries</th>
+                                <th>Next Attempt</th>
+                                <th>Error</th>
+                            </tr>
+                        </thead>
+                        <tbody id="retry-queue-body"></tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- Row 3: Failures + Missed -->
+        <div class="row">
+            <section class="card">
+                <h2>Recent Failures</h2>
+                <div id="failures" class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Post ID</th>
+                                <th>Attempt</th>
+                                <th>Outcome</th>
+                                <th>Error</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="failures-body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Missed Posts</h2>
+                <div id="missed" class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Platform</th>
+                                <th>Copy</th>
+                                <th>Was Scheduled</th>
+                            </tr>
+                        </thead>
+                        <tbody id="missed-body"></tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+[general]
+api_host = "127.0.0.1"
+api_port = 8000
+log_level = "INFO"
+
+[scheduler]
+enabled = true
+check_interval_sec = 60
+max_retries = 3
+backoff_base_sec = 60
+missed_post_window_min = 30
+catch_up_max_lateness_min = 1440
+lock_ttl_sec = 300
+
+[rate_limits]
+twitter_tweets_per_3h = 300
+reddit_posts_per_minute = 10
+
+[media]
+max_image_mb = 20
+max_video_mb = 512
+local_storage_path = "./campaigns"
+
+[security]
+allow_remote = false
+dashboard_enabled = true
+cors_origins = ["http://localhost:8000"]
